@@ -1,0 +1,33 @@
+{
+  "template" : {
+    "Primary Navigation" : "メイン ナビゲーション",
+    "Secondary Navigation" : "セカンダリ ナビゲーション",
+    "Footer Navigation" : "フッター ナビゲーション",
+    "Default" : "既定"
+  },
+  "album" : {
+    "Album" : "アルバム",
+    "New Album" : "新しいアルバム",
+    "Add Track" : "トラックを追加"
+  },
+  "blog" : {
+    "Blog" : "ブログ",
+    "New Blog" : "新しいブログ",
+    "Add Post" : "投稿を追加"
+  },
+  "events" : {
+    "Events" : "イベント",
+    "New Events" : "新しいイベント",
+    "Add Event" : "イベントを追加"
+  },
+  "folders" : {
+    "Folder" : "フォルダー",
+    "New Folder" : "新規フォルダー",
+    "Add Page" : "ページを追加"
+  },
+  "index" : {
+    "Index" : "インデックス",
+    "New Index" : "新しいインデックス",
+    "Add Section" : "セクションを追加"
+  }
+}
