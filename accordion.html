@@ -21,7 +21,7 @@
       position: relative;
       margin: 2em;
     }
-    input {
+    input[type="checkbox"].dropdown {
       position: absolute;
       left: 0;
       top: 0;
@@ -35,6 +35,8 @@
       color: white;
       padding: 1em;
       position: relative;
+      font-family: 'Clarkson','Helvetica Neue',Helvetica,Arial,sans-serif;
+      font-size: 16px;
     }
     label::before {
       content: "";
@@ -87,12 +89,33 @@
     }
     .button_container {
       display: flex;
-      justify-content: space-between;
-      width: 70%;
+      justify-content: space-around;
+      width: 100%;
     }
     .button_container {
       margin-bottom: 30px;
     }
+
+      .checklist {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        margin-left: 30px;
+      }
+
+      .checklist li {
+        text-decoration: none;
+      }
+
+      .checklist li input[type="checkbox"]:checked + label {
+        text-decoration: line-through;
+      }
+
+
+
+
+
   </style>
 
   <script>
@@ -120,6 +143,15 @@
         cell2.textContent = college;
       }
     }
+    //for crossoff item
+    function handleCheckboxChange(checkbox) {
+        const label = checkbox.nextElementSibling;
+        if (checkbox.checked) {
+          label.style.textDecoration = "line-through";
+        } else {
+          label.style.textDecoration = "none";
+        }
+      }
 
     // Function to filter the table based on the search input
     function filterTable() {
@@ -159,8 +191,8 @@
   </script>
 
   <div class="c">
-    <input type="checkbox" id="faq-1" />
-    <p class="H2copy" style="font-size: 1.5em;"><label for="faq-1">Step 1: Check your Eligibility!</label></p> 
+    <input type="checkbox" class = "dropdown" id ="faq-1" />
+    <p class="H2copy checktext" style="font-size: 1.5em;"><label for="faq-1">Step 1: Check your Eligibility!</label></p> 
     <div class="p">
       <p>
         <a href="https://www.surveymonkey.com/r/CALFRESHQUIZ"
@@ -170,8 +202,8 @@
     </div>
   </div>
   <div class="c">
-    <input type="checkbox" id="faq-2" />
-    <p class="H2copy" style="font-size: 1.5em;"><label for="faq-2">Step 2: Gather Proof Documents</label></p> 
+    <input type="checkbox" class = "dropdown"id="faq-2" />
+    <p class="H2copy checktext" style="font-size: 1.5em;"><label for="faq-2">Step 2: Gather Proof Documents</label></p> 
     <div class="p">
       <p>
         If you qualify for an LPIE,
@@ -183,8 +215,8 @@
     </div>
   </div>
   <div class="c">
-    <input type="checkbox" id="faq-3" />
-    <p class="H2copy" style="font-size: 1.5em;"><label for="faq-3">Apply for CalFresh!</label></p> 
+    <input type="checkbox"class = "dropdown" id="faq-3" />
+    <p class="H2copy checktext" style="font-size: 1.5em;"><label for="faq-3">Apply for CalFresh!</label></p> 
     <div class="p">
       <p>
         Complete the application on your own, or schedule and appointment with
@@ -203,4 +235,12 @@
       <br>
     </div>
   </div>
+
+<ul class = " checklist">
+  <li><input type="checkbox" class = "checklist" onchange="handleCheckboxChange(this)">Identity verification such as driver’s license, social security card or voter registration</li>
+  <li><input type="checkbox" class = "checklist" onchange="handleCheckboxChange(this)">Proof of rental/lease agreement. You can still apply without a mailing address!</li>
+  <li><input type="checkbox" class = "checklist" onchange="handleCheckboxChange(this)">Class schedule</li>
+  <li><input type="checkbox" class = "checklist" onchange="handleCheckboxChange(this)">Paystubs (if applicable)</li>
+  <li><input type="checkbox" class = "checklist"  onchange="handleCheckboxChange(this)">Financial aid award information, even if award information appears as $0 or blank</li>
+</ul>
 </html>
