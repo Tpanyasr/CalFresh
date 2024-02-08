@@ -14,7 +14,8 @@
 
 
   Note: The table is searchable based on the "College" or "Program" columns. To filter the table based on a specific value, enter the search term in the search input field located at the top of the table.
-  Instructions how to add and edit the drop down and checklist 
+
+  Instructions how to add and edit the drop down and checklist found below:
 
     https://docs.google.com/document/d/1aXbwCbFrUGzIoyu4M0I-tDGkuWXbhngyyPlczxGrHj4/edit?usp=sharing 
 
