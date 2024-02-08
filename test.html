@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    #tableContainer {
+      max-height: 300px; /* Set the maximum height for the table container */
+      overflow-y: auto; /* Enable vertical scroll */
+      border-bottom: 0px solid #333; /* Add a bottom border to the table container */
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+th, td {
+  border: 3px solid #333; /* Dark grey border for rows */
+  padding: 8px;
+  text-align: left;
+  font-family: 'Clarkson','Helvetica Neue',Helvetica,Arial,sans-serif;
+}
+
+th {
+  background-color: #8bc441; /* Light green background for header */
+  color: white; /* White text color for the header */
+  font-size: 22px;
+}
+
+td {
+  font-size: 16px; /* Font size for the table data */
+}
+    #searchBar {
+        margin-top: 10px;
+        text-align: center;
+        margin-bottom: 10px;
+        display: flex;
+        justify-content: start;
+        margin-left: 30px;
+        
+      }
+
+      #searchInput {
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        font-size: 14px;
+        width: 25%;
+      } 
+  
+      .searchlabel {
+        margin-top: 5px;
+        margin-right: 10px;
+        font-size: 20px;
+      }
+  
+      input {
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        font-size: 14px;
+        width: 25%;
+      }
+
+  </style>
+  <title>Programs Table</title>
+</head>
+<body>
+
+  <div id="searchBar">
+    <p class = "searchlabel">Search:</p>
+    <input type="text" id="searchInput" oninput="filterTable()" placeholder="Filter by College or Program">
+  </div>
+
+  <div id="tableContainer">
+    <table id="programsTable">
+      <tr class="header">
+        <th style="width:60%;">College</th>
+        <th style="width:40%;">Program</th>
+      </tr>
+    </table>
+  </div>
+
+  <script>
+    // Function to parse CSV data and populate the table
+    function populateTable(csvData) {
+      const table = document.getElementById('programsTable');
+
+      // Split the CSV data into rows
+      const rows = csvData.split('\n');
+
+      // Iterate through rows and create table rows
+      for (let i = 1; i < rows.length; i++) {
+        const columns = rows[i].split(',');
+        const programName = columns[0].trim();
+        const college = columns[1].trim();
+
+        // Create a new table row
+        const row = table.insertRow(-1);
+
+        // Insert cells with program name and college
+        const cell1 = row.insertCell(0);
+        const cell2 = row.insertCell(1);
+
+        cell1.textContent = programName;
+        cell2.textContent = college;
+      }
+    }
+
+    // Function to filter the table based on the search input
+    function filterTable() {
+      const input = document.getElementById('searchInput');
+      const filter = input.value.toUpperCase();
+      const table = document.getElementById('programsTable');
+      const rows = table.getElementsByTagName('tr');
+
+      // Iterate through each row and hide those that don't match the search input
+      for (let i = 1; i < rows.length; i++) {
+        const cells = rows[i].getElementsByTagName('td');
+        let display = 'none';
+
+        // Check if the program name or college contains the search input
+        for (let j = 0; j < cells.length; j++) {
+          const cellText = cells[j].textContent || cells[j].innerText;
+          if (cellText.toUpperCase().indexOf(filter) > -1) {
+            display = '';
+            break;
+          }
+        }
+
+        rows[i].style.display = display;
+      }
+    }
+
+    // Read the CSV file and call populateTable when the page loads
+    document.addEventListener('DOMContentLoaded', function() {
+      const csvLink = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSTiIruJPjnN9QEeWEaLU_c8q51JS-SMlLpGd2sZlRa9wmMAlVjh-44zjuVHVHxq-hyBb7d1eKSZ9C8/pub?output=csv";
+
+      // Read the CSV file and call the populateTable function
+      fetch(csvLink)
+        .then(response => response.text())
+        .then(data => populateTable(data));
+    });
+  </script>
+
+</body>
+</html>

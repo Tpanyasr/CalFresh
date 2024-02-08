@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Programs Table</title>
+  </head>
+  <style>
+    @import url("https://fonts.googleapis.com/css?family=Poppins:400,400i,700");
+    *,
+    *::after,
+    *::before {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: "Poppins", sans-serif;
+    }
+    div.c {
+      position: relative;
+      margin: 2em;
+    }
+    input {
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 100%;
+      opacity: 0;
+      visibility: 0;
+    }
+    .H2copy {
+      background: #00944c;
+      color: white;
+      padding: 1em;
+      position: relative;
+    }
+    label::before {
+      content: "";
+      display: inline-block;
+      border: 15px solid transparent;
+      border-left: 20px solid white;
+    }
+    label {
+      cursor: pointer;
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+    div.p {
+      max-height: 0px;
+      overflow: hidden;
+      transition: max-height 0.5s;
+      background-color: white;
+      box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+    }
+    div.p p {
+      padding: 2em;
+    }
+    input:checked ~ .H2copy label::before {
+      border-left: 15px solid transparent;
+      border-top: 20px solid white;
+      margin-top: 12px;
+      margin-right: 10px;
+    }
+    input:checked ~ .H2copy ~ div.p {
+      max-height: 300px;
+    }
+    a {
+      color: steelblue;
+    }
+    .button {
+      background-color: #04aa6d; /* Green */
+      border: none;
+      color: white;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      font-family: "Poppins", sans-serif;
+      border-radius: 13px;
+      margin-top: 10px;
+      margin-left: 20px;
+      margin-bottom: 20px;
+    }
+    .button_container {
+      display: flex;
+      justify-content: space-between;
+      width: 70%;
+    }
+    .button_container {
+      margin-bottom: 30px;
+    }
+  </style>
+
+  <script>
+    // Function to parse CSV data and populate the table
+    function populateTable(csvData) {
+      const table = document.getElementById("programsTable");
+
+      // Split the CSV data into rows
+      const rows = csvData.split("\n");
+
+      // Iterate through rows and create table rows
+      for (let i = 1; i < rows.length; i++) {
+        const columns = rows[i].split(",");
+        const programName = columns[0].trim();
+        const college = columns[1].trim();
+
+        // Create a new table row
+        const row = table.insertRow(-1);
+
+        // Insert cells with program name and college
+        const cell1 = row.insertCell(0);
+        const cell2 = row.insertCell(1);
+
+        cell1.textContent = programName;
+        cell2.textContent = college;
+      }
+    }
+
+    // Function to filter the table based on the search input
+    function filterTable() {
+      const input = document.getElementById("searchInput");
+      const filter = input.value.toUpperCase();
+      const table = document.getElementById("programsTable");
+      const rows = table.getElementsByTagName("tr");
+
+      // Iterate through each row and hide those that don't match the search input
+      for (let i = 1; i < rows.length; i++) {
+        const cells = rows[i].getElementsByTagName("td");
+        let display = "none";
+
+        // Check if the program name or college contains the search input
+        for (let j = 0; j < cells.length; j++) {
+          const cellText = cells[j].textContent || cells[j].innerText;
+          if (cellText.toUpperCase().indexOf(filter) > -1) {
+            display = "";
+            break;
+          }
+        }
+
+        rows[i].style.display = display;
+      }
+    }
+
+    // Read the CSV file and call populateTable when the page loads
+    document.addEventListener("DOMContentLoaded", function () {
+      const csvLink =
+        "https://docs.google.com/spreadsheets/d/e/2PACX-1vSTiIruJPjnN9QEeWEaLU_c8q51JS-SMlLpGd2sZlRa9wmMAlVjh-44zjuVHVHxq-hyBb7d1eKSZ9C8/pub?output=csv";
+
+      // Read the CSV file and call the populateTable function
+      fetch(csvLink)
+        .then((response) => response.text())
+        .then((data) => populateTable(data));
+    });
+  </script>
+
+  <div class="c">
+    <input type="checkbox" id="faq-1" />
+    <p class="H2copy" style="font-size: 1.5em;"><label for="faq-1">Step 1: Check your Eligibility!</label></p> 
+    <div class="p">
+      <p>
+        <a href="https://www.surveymonkey.com/r/CALFRESHQUIZ"
+          >Take this survey to see if you might be eligible for Cal Fresh!</a
+        >
+      </p>
+    </div>
+  </div>
+  <div class="c">
+    <input type="checkbox" id="faq-2" />
+    <p class="H2copy" style="font-size: 1.5em;"><label for="faq-2">Step 2: Gather Proof Documents</label></p> 
+    <div class="p">
+      <p>
+        If you qualify for an LPIE,
+        <a
+          href="https://docs.google.com/forms/d/e/1FAIpQLSepF1RAQoOFHYAxObMZNpXsWpM6A_ggVibh-HWILaRwpMDGSg/viewform"
+          >click here to create a verification statement</a
+        >
+      </p>
+    </div>
+  </div>
+  <div class="c">
+    <input type="checkbox" id="faq-3" />
+    <p class="H2copy" style="font-size: 1.5em;"><label for="faq-3">Apply for CalFresh!</label></p> 
+    <div class="p">
+      <p>
+        Complete the application on your own, or schedule and appointment with
+        us for additional guidance!
+      </p>
+      <div class="button_container">
+        <a href="https://www.getcalfresh.org/?source=cpslo">
+          <button class="button">Click to Apply on your own</button>
+        </a>
+        <a href="https://calendly.com/calfreshcalpoly">
+          <button class="button">
+            Click to schedule an assistance appointment
+          </button>
+        </a>
+      </div>
+      <br>
+    </div>
+  </div>
+</html>
