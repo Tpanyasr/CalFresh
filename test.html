@@ -30,7 +30,7 @@ th {
 td {
   font-size: 16px; /* Font size for the table data */
 }
-    #searchBar {
+    .searchBar {
         margin-top: 10px;
         text-align: center;
         margin-bottom: 10px;
@@ -42,14 +42,16 @@ td {
 
       #searchInput {
         padding: 5px;
+        margin-top: 7px;
         border: 1px solid #ccc;
-        border-radius: 3px;
+        border-radius: 13px;
         font-size: 14px;
         width: 25%;
+        height: 30px;
       } 
   
       .searchlabel {
-        margin-top: 5px;
+        margin-top: 15px;
         margin-right: 10px;
         font-size: 20px;
       }
@@ -67,7 +69,7 @@ td {
 </head>
 <body>
 
-  <div id="searchBar">
+  <div class ="searchBar">
     <p class = "searchlabel">Search:</p>
     <input type="text" id="searchInput" oninput="filterTable()" placeholder="Filter by College or Program">
   </div>
@@ -75,8 +77,8 @@ td {
   <div id="tableContainer">
     <table id="programsTable">
       <tr class="header">
-        <th style="width:60%;">College</th>
-        <th style="width:40%;">Program</th>
+        <th style="width:60%;">College | Program </th>
+        <th style="width:40%;">Major/Concentration</th>
       </tr>
     </table>
   </div>
